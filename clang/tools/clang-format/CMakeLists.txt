@@ -16,6 +16,19 @@ clang_target_link_libraries(clang-format
   ${CLANG_FORMAT_LIB_DEPS}
   )
 
+# static linked
+if(LLVM_STATIC_CLANG_FORMAT)
+  target_compile_options(clangTidy PRIVATE
+      -ffunction-sections
+      -fdata-sections
+  )
+  target_link_options(clangTidy PRIVATE
+      -static
+      -Wl,--gc-sections
+      -s
+  )
+endif()
+
 if( LLVM_LIB_FUZZING_ENGINE OR LLVM_USE_SANITIZE_COVERAGE )
   add_subdirectory(fuzzer)
 endif()

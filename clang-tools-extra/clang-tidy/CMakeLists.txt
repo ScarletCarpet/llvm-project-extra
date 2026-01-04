@@ -48,6 +48,19 @@ if(CLANG_TIDY_ENABLE_STATIC_ANALYZER)
   )
 endif()
 
+# static linked
+if(LLVM_STATIC_CLANG_TIDY)
+  target_compile_options(clangTidy PRIVATE
+      -ffunction-sections
+      -fdata-sections
+  )
+  target_link_options(clangTidy PRIVATE
+      -static
+      -Wl,--gc-sections
+      -s
+  )
+endif()
+
 # Checks.
 # If you add a check, also add it to ClangTidyForceLinker.h in this directory.
 add_subdirectory(android)
