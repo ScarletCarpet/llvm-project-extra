@@ -18,14 +18,13 @@ clang_target_link_libraries(clang-format
 
 # static linked
 if(LLVM_STATIC_CLANG_FORMAT)
-  target_compile_options(clangTidy PRIVATE
+  target_compile_options(clang-format PRIVATE
       -ffunction-sections
       -fdata-sections
   )
-  target_link_options(clangTidy PRIVATE
+  target_link_options(clang-format PRIVATE
       -static
       -Wl,--gc-sections
-      -s
   )
 endif()
 

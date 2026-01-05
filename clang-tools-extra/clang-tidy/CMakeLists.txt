@@ -57,7 +57,6 @@ if(LLVM_STATIC_CLANG_TIDY)
   target_link_options(clangTidy PRIVATE
       -static
       -Wl,--gc-sections
-      -s
   )
 endif()
 
